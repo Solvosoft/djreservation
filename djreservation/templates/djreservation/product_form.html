@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<form method="post" >
+	{% csrf_token %}
+	<table class="table">
+{{form}}
+<tr>
+	<td>{% trans "Available:" %}</td>
+	<td> {{ available_amount}} </td>
+</tr>
+{% for field in extra_fields%}
+<tr>
+	<td>{{field.label}}</td>
+	<td>{{field.value}}</td>
+</tr>
+{%endfor%}
+<tr>
+	<td></td>
+	<td><input class="btn btn-success" type="submit" value="{% trans 'Reserve'%}"></td>
+</tr>
+</table>
+</form>
+{%endblock%}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="row">
+	 <div class="col-md-8 col-md-offset-2">
+	 	
+		<form class="form-horizontal" method="post">
+			{% csrf_token %} 
+			<h2>{% trans 'Are you sure? See above the products details' %}</h2>
+			
+			<input type="submit"
+			class="btn btn-success" value="{% trans 'Finish this reservation' %}" />
+		</form>
+	</div>
+</div>
+<div class="row">
+ <div class="col-md-8 col-md-offset-1">
+ 	<h1> {% trans 'Reserved products' %} </h1>
+	<ul class="list-group">
+		{% for product in reservation.product_set.all %}
+  			<li class="list-group-item">
+  				{{product}}
+<a href="{% url 'delete_product_reservation' product.pk%}" style="position: absolute;right: 15px;" >
+  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+</a>
+  			</li>
+  			{% empty %}
+  			<li class="list-group-item">
+  				{% trans "Products are not reserved yet" %}
+  			</li>  			
+  		{% endfor %}
+  	</ul>
+ </div>
+</div>		
+
+{% endblock %}

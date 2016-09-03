@@ -1,0 +1,26 @@
+{% load i18n %}
+
+<table id="products">
+
+	<tr style="background: #79aec8 none repeat scroll 0 0">
+		<th><input type="checkbox" name="all" value="uncheck"></th>
+		<th> {% trans 'Approves all' %} </th>
+	</tr>
+
+	{% for product in instance.product_set.all%}
+	<tr>
+		<td><input type="checkbox" name="djreservation_product_list" 
+			value="{{product.pk}}" {% if product.borrowed %}checked{%endif%}> </td>
+		<td>{{product}}</td>
+	</tr>
+
+	{% endfor %}
+	
+</table>
+
+
+<script>
+(function($){ $('input[name="all"]').change(function(){
+	if($(this).is(':checked') ){
+    $('#products input').prop( "checked", true );}}) })(django.jQuery)
+</script>
