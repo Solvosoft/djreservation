@@ -3,21 +3,21 @@ Django reservation system
 
 * Customizable reservations (you can provide your own reservation model)
 
-  .. image:: https://github.com/luisza/djreservation/blob/master/demo/img/ReserveObject.png
+  .. image:: https://github.com/luisza/djreservation/blob/master/demo/img/ReserveObject.png?raw=true
 
 * Generic reservation create view and reserve product view
 
-  .. image:: https://github.com/luisza/djreservation/blob/master/demo/img/creating_reservation.png
+  .. image:: https://github.com/luisza/djreservation/blob/master/demo/img/creating_reservation.png?raw=true
 
 * Reservation list filter by user
 
-  .. image:: https://github.com/luisza/djreservation/blob/master/demo/img/userreservationlist.png
+  .. image:: https://github.com/luisza/djreservation/blob/master/demo/img/userreservationlist.png?raw=true
 
 * Email notifications with template system
 * Django Admin backend for administrative proposuse like Accept, Borrow, Denied reservations
 * Parcial reservations in admin (Not all products can be borrowed)
 
-  .. image:: https://github.com/luisza/djreservation/blob/master/demo/img/ReservationAdmin.png
+  .. image:: https://github.com/luisza/djreservation/blob/master/demo/img/ReservationAdmin.png?raw=true
 
 * UI based on Twitter Bootstrap
 * Using i18n to handle translations
