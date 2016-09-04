@@ -6,8 +6,20 @@ from .forms import ProductForm, ReservationForm
 from django.http.response import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
-
+from .email import send_reservation_email
+from django.views.generic.list import ListView
 # Create your views here.
+
+
+class ReservationList(ListView):
+    model = Reservation
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = ListView.get_queryset(self)
+        queryset = queryset.filter(user=self.request.user).exclude(
+            status=Reservation.BUILDING).order_by('status')
+        return queryset
 
 
 class CreateReservation(CreateView):
@@ -30,6 +42,7 @@ class CreateReservation(CreateView):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
+        send_reservation_email(self.object, self.request.user)
         return self.get_success_view()
 
 
@@ -47,6 +60,7 @@ def finish_reservation(request):
         reservation.status = reservation.REQUESTED
         reservation.save()
         request.reservation = None
+        send_reservation_email(reservation, request.user)
         response = render(
             request, 'djreservation/reservation_finished.html')
         response.set_cookie("reservation", "0")

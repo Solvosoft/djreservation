@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block content %}
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+	{% for reservation in object_list%}
+
+  <div class="panel {% if reservation.status == reservation.REQUESTED %} panel-success {%elif reservation.status == reservation.BORROWED %} panel-danger {%else%}panel-default{%endif%}">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{reservation.pk}}" aria-expanded="true" aria-controls="collapse{{reservation.pk}}">
+ {{reservation}}         
+        </a>
+      </h4>
+    </div>
+    <div id="collapse{{reservation.pk}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+      	<ul class="list-group">
+      		{% for product in reservation.product_set.all%}
+      			<li class="list-group-item">{{product}}
+{% if product.borrowed %}      				
+<a href="#" style="position: absolute;right: 15px;" >
+  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+</a>
+{%else%}
+<a href="#" style="position: absolute;right: 15px;" >
+  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+</a>
+{% endif %}	
+      			</li>
+      		{% endfor%}
+      	</ul>
+      </div>
+    </div>
+  </div>
+
+	{% endfor %}
+</div>
+
+
+{% if is_paginated %}
+	<nav aria-label="...">
+		<ul class="pager">
+			{% if page_obj.has_previous %}
+			<li>
+				<a href="?page={{ page_obj.previous_page_number }}">{% trans 'Previous' %}</a>
+			</li>
+			{% endif %}
+	
+			<li>
+				{% trans 'Page' %} {{ page_obj.number }} -- {{ page_obj.paginator.num_pages }}.
+			</li>
+	
+			{% if page_obj.has_next %}
+			<li>
+				<a href="?page={{ page_obj.next_page_number }}">{% trans 'Next' %}</a>
+			</li>
+			{% endif %}
+		</ul>
+	</nav>
+
+{% endif %}
+
+{% endblock%}

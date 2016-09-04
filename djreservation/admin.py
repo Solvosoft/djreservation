@@ -4,7 +4,7 @@ from django.contrib.contenttypes.admin import GenericTabularInline
 from django.utils.html import format_html_join
 from django.utils.safestring import mark_safe
 from django.template.loader import render_to_string
-
+from .email import send_reservation_email
 
 # Register your models here.
 
@@ -43,14 +43,30 @@ class ReservationAdmin(admin.ModelAdmin):
     list_of_products.short_description = "list of products"
 
     def save_model(self, request, obj, form, change):
+        old_status, product_change = -1, False
+        if change:
+            old_status = obj.__class__.objects.filter(
+                pk=obj.pk).values_list('status')[0][0]
         dev = admin.ModelAdmin.save_model(self, request, obj, form, change)
         if 'djreservation_product_list' in request.POST:
             product_pks = request.POST.getlist("djreservation_product_list")
-            obj.product_set.all().exclude(
-                pk__in=product_pks).update(borrowed=False)
+            old_pks = list(map(lambda x: str(x[0]),
+                               obj.product_set.all().filter(
+                borrowed=True).values_list("pk")))
 
-            obj.product_set.all().filter(
-                pk__in=product_pks).update(borrowed=True)
+            if not (len(product_pks) == len(old_pks) and not any(
+                    set(product_pks) - set(old_pks))):
+
+                obj.product_set.all().exclude(
+                    pk__in=product_pks).update(borrowed=False)
+
+                obj.product_set.all().filter(
+                    pk__in=product_pks).update(borrowed=True)
+                product_change = True
+
+        if product_change or int(old_status) != obj.status:
+            send_reservation_email(obj, request.user)
+
         return dev
 
 admin.site.register(Reservation, ReservationAdmin)

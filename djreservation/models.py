@@ -14,13 +14,17 @@ auth_user = settings.AUTH_USER_MODEL if getattr(
 class Reservation(models.Model):
     BUILDING = 0
     REQUESTED = 1
+    ACEPTED = 2
+    DENIED = 3
+    BORROWED = 4
+    RETURNED = 5
     STATUS = (
-        (0, _("building")),
-        (1, _("Requested")),
-        (2, _("Acepted")),
-        (3, _("Denied")),
-        (4, _("Borrowed")),
-        (5, _("Returned")),
+        (BUILDING, _("Building")),
+        (REQUESTED, _("Requested")),
+        (ACEPTED, _("Acepted")),
+        (DENIED, _("Denied")),
+        (BORROWED, _("Borrowed")),
+        (RETURNED, _("Returned")),
     )
     user = models.ForeignKey(auth_user)
     reserved_start_date = models.DateTimeField(default=timezone.now)

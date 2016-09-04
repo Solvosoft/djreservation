@@ -13,5 +13,7 @@ urlpatterns = [
     url(r"^reservation/finish$",
         views.finish_reservation, name="finish_reservation"),
     url(r"^reservation/delete_product_reservation/(?P<pk>\d+)$",
-        views.deleteProduct, name="delete_product_reservation")
+        views.deleteProduct, name="delete_product_reservation"),
+    url(r"reservation/list", views.ReservationList.as_view(),
+        name="reservation_list")
 ]

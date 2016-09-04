@@ -1,0 +1,30 @@
+{% load i18n %}
+{% trans 'Hi,' %} <strong>{{reservation.user.get_full_name}}</strong>
+<br>
+<strong>{% trans 'Reservation status' %}:</strong> {{reservation.get_status_display}}
+<br>
+<strong>{% trans 'Reservation start date' %}:</strong> {{reservation.reserved_start_date}}
+<br>
+<strong>{% trans 'Reservation returned date' %}:</strong> {{reservation.return_date}}
+<hr>
+
+{% block content %}
+
+{%endblock%}
+
+<br>
+<h1> {% trans 'List of products'%}</h1>
+
+<ul>
+{% for product in reservation.product_set.all%}
+	<li> <strong>{% if product.borrowed %} {% trans 'Borrowed' %} {%else%} {% trans 'Not borrowed' %} {%endif%} </strong> {{product}} </li>
+{% endfor%}
+</ul>
+
+<br>
+{% block extra_contact %}
+{% endblock %}
+<br>
+{% trans 'Thanks' %}
+<br> <br>
+{% trans 'Tramited by' %}: {{user.get_full_name}}
