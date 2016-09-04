@@ -3,14 +3,17 @@ import os
 
 CLASSIFIERS = [
     'Environment :: Web Environment',
-    'Framework :: Django',
+	'Framework :: Django',
+	'Framework :: Django :: 1.10',
     'Intended Audience :: Developers',
-    'License :: OSI Approved :: GPLv3 License',
+    'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
     'Operating System :: OS Independent',
     'Programming Language :: Python',
     'Programming Language :: Python :: 3.5',
     'Topic :: Internet :: WWW/HTTP',
     'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+	'Topic :: Software Development :: Libraries :: Python Modules',
+	'Development Status :: 4 - Beta',
 ]
 
 README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
@@ -28,7 +31,7 @@ setup(
     description='Powerful and dinamic reservation system in django.',
     long_description=README,
     url='https://github.com/luisza/djreservation',
-    license='GPLv3 License',
+    license='GNU General Public License v3 (GPLv3)',
     platforms=['OS Independent'],
     classifiers=CLASSIFIERS,
     install_requires=[
