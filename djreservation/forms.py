@@ -9,6 +9,7 @@ Free as freedom will be 2/9/2016
 from __future__ import unicode_literals
 from django import forms
 from .models import Product, Reservation
+from django.utils.translation import ugettext_lazy as _
 
 
 class ReservationForm(forms.ModelForm):
@@ -16,7 +17,8 @@ class ReservationForm(forms.ModelForm):
     def clean(self):
         if hasattr(self.request, "reservation"):
             raise forms.ValidationError(
-                "You can not create reservation with active reservation")
+                _("You can not create reservation with active reservation"))
+        cleaned_data = super(ReservationForm, self).clean()
 
     class Meta:
         model = Reservation
@@ -26,6 +28,18 @@ class ReservationForm(forms.ModelForm):
 
 class ProductForm(forms.ModelForm):
     model_instance = forms.CharField(widget=forms.HiddenInput)
+    available_amount = forms.FloatField(widget=forms.HiddenInput)
+
+    def clean(self):
+        cleaned_data = super(ProductForm, self).clean()
+
+        if cleaned_data['amount'] <= 0:
+            raise forms.ValidationError(
+                _("You amount correct, requested 0 or negative value"))
+
+        if cleaned_data['amount'] > cleaned_data['available_amount']:
+            raise forms.ValidationError(
+                _("You requested more than product available"))
 
     class Meta:
         model = Product

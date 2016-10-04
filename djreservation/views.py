@@ -116,11 +116,11 @@ class ProductReservationView(CreateView):
     def get_form_kwargs(self):
         kwargs = CreateView.get_form_kwargs(self)
         kwargs['initial']['model_instance'] = str(self.instance.pk)
+        kwargs['initial']["available_amount"] = self.get_available_amount()
         return kwargs
 
     def get(self, request, *args, **kwargs):
         if "modelpk" in kwargs:
-            print(kwargs)
             model_pk = kwargs.pop("modelpk")
             self.instance = self.base_model.objects.get(pk=model_pk)
         return CreateView.get(self, request, *args, **kwargs)
