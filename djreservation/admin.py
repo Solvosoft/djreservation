@@ -19,7 +19,8 @@ class ReservationAdmin(admin.ModelAdmin):
     readonly_fields = ["user", "updated_datetime",
                        "list_of_products"]
 
-    list_display = ['user', 'status', "reserved_start_date", "return_date"]
+    list_display = [
+        'user', 'status', "reserved_start_date", "reserved_end_date"]
     list_filter = ['status']
     search_fields = ['user__firstname', "user__lastname"]
     inlines = [ObservationInline]
@@ -27,7 +28,7 @@ class ReservationAdmin(admin.ModelAdmin):
         (None, {
             'fields': (
                 ("user", "status", "updated_datetime"),
-                ("reserved_start_date", "return_date"),
+                ("reserved_start_date", "reserved_end_date"),
                 ("list_of_products")
             )
         }),

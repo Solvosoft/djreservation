@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.utils.translation import ugettext_lazy as _
+import uuid
 # Create your models here.
 
 auth_user = settings.AUTH_USER_MODEL if getattr(
@@ -28,7 +29,7 @@ class Reservation(models.Model):
     )
     user = models.ForeignKey(auth_user)
     reserved_start_date = models.DateTimeField(default=timezone.now)
-    return_date = models.DateTimeField()
+    reserved_end_date = models.DateTimeField()
     status = models.SmallIntegerField(choices=STATUS, default=BUILDING)
     updated_datetime = models.DateTimeField(auto_now=True)
 
@@ -37,7 +38,7 @@ class Reservation(models.Model):
                                        self.get_status_display(),
                                        self.reserved_start_date.strftime(
             "%Y/%m/%d %H:%S"),
-            self.return_date.strftime(
+            self.reserved_end_date.strftime(
             "%Y/%m/%d %H:%S"),
         )
 
@@ -68,3 +69,9 @@ class Product(models.Model):
 class Observation(models.Model):
     reservation = models.ForeignKey(Reservation)
     text = models.TextField()
+
+
+class ReservationToken(models.Model):
+    reservation = models.ForeignKey(Reservation)
+    token = models.UUIDField(default=uuid.uuid4, editable=False)
+    base_url = models.URLField(default="http://localhost:8000")

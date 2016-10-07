@@ -1,0 +1,19 @@
+{% extends 'djreservation/reservation_form.html'%}
+{% load i18n %}
+
+
+{% block content_title%}
+<h1> {% trans "Creating a reservation of :"%} <br><small >{{object}}</small></h1>
+{% endblock%}
+{% block form_start %}
+{{ product_form.non_field_errors }}
+  <div class="form-group">
+  	{{product_form.amount.errors }}
+    <label for="id_amount" class="col-sm-2 control-label">{{product_form.amount.label}}</label>
+<div class="col-sm-2">
+{{product_form.amount}}
+{{product_form.available_amount}}
+{{product_form.model_instance}}
+</div></div>
+  
+{% endblock %}	

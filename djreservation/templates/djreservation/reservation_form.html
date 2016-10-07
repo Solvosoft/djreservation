@@ -4,6 +4,9 @@
 {% block css%} 
   <link rel="stylesheet" type="text/css" media="screen"
      href="{% static 'css/bootstrap-datetimepicker.min.css' %}">
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" 
+rel="stylesheet">
+
  <style>
  .bootstrap-datetimepicker-widget{
  	min-width: 250px;
@@ -16,9 +19,15 @@
 
 {% block content %}
 
+{% block content_title%}
 <h1> {% trans "Creating a reservation"%} </h1>
+
+{% endblock %}
+{{form.errors}}
 <form class="form-horizontal" method="post">
 {% csrf_token %} 
+
+{% block form_start %}{% endblock %}	
 	
 <div class="form-group">
 	{{ form.reserved_start_date.errors }}
@@ -38,11 +47,11 @@
 	
 
 <div class="form-group">
-	{{ form.return_date.errors }}
-	<label id="{{ form.return_date.id_label_tag }}" class="col-sm-2 control-label" > {% trans 'Return date' %} </label>
-<div id="dtp_return_date" class="input-append date">
+	{{ form.reserved_end_date.errors }}
+	<label id="{{ form.reserved_end_date.id_label_tag }}" class="col-sm-2 control-label" > {% trans 'Reservation end date' %} </label>
+<div id="dtp_reserved_end_date" class="input-append date">
 	<div class="col-sm-2">							
-	      {{ form.return_date }}
+	      {{ form.reserved_end_date }}
     </div>
 
 	<div class="col-sm-2">
@@ -52,6 +61,7 @@
 	</div>
 </div>
 </div>
+{% block form_end %}{% endblock %}	
 	
 <button type="submit" class="btn btn-default">{% trans 'Submit' %}</button>
 </form>
@@ -65,10 +75,12 @@
     
         <script type="text/javascript">
 	      rsd= $('#dtp_reserved_start_date').datetimepicker({
-	        format: 'MM/dd/yyyy hh:mm',
+	        format: 'dd/MM/yyyy hh:mm',
+	        autoclose: true
 	      });
-	      rd= $('#dtp_return_date').datetimepicker({
-	        format: 'MM/dd/yyyy hh:mm',
+	      rd= $('#dtp_reserved_end_date').datetimepicker({
+	        format: 'dd/MM/yyyy hh:mm',
+	        autoclose: true
 	      });
 </script>
     

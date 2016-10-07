@@ -15,10 +15,11 @@ from django.utils.translation import ugettext_lazy as _
 class ReservationForm(forms.ModelForm):
 
     def clean(self):
-        if hasattr(self.request, "reservation"):
-            raise forms.ValidationError(
-                _("You can not create reservation with active reservation"))
-        cleaned_data = super(ReservationForm, self).clean()
+        if hasattr(self, 'request'):
+            if hasattr(self.request, "reservation"):
+                raise forms.ValidationError(
+                    _("You can not create reservation with active reservation"))
+            cleaned_data = super(ReservationForm, self).clean()
 
     class Meta:
         model = Reservation

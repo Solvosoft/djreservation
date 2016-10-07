@@ -1,16 +1,15 @@
 {% load i18n %}
 {% trans 'Hi,' %} <strong>{{reservation.user.get_full_name}}</strong>
 <br>
+{% block precontent %}{%endblock%}
 <strong>{% trans 'Reservation status' %}:</strong> {{reservation.get_status_display}}
 <br>
 <strong>{% trans 'Reservation start date' %}:</strong> {{reservation.reserved_start_date}}
 <br>
-<strong>{% trans 'Reservation returned date' %}:</strong> {{reservation.return_date}}
+<strong>{% trans 'Reservation end date' %}:</strong> {{reservation.reserved_end_date}}
 <hr>
 
-{% block content %}
-
-{%endblock%}
+{% block content %}{%endblock%}
 
 <br>
 <h1> {% trans 'List of products'%}</h1>

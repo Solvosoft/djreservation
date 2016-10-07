@@ -6,6 +6,7 @@ Created on 1/8/2016
 from __future__ import unicode_literals
 from django.conf.urls import url
 from . import views
+from .settings import TOKENIZE
 
 urlpatterns = [
     url(r"^reservation/create$",
@@ -15,5 +16,12 @@ urlpatterns = [
     url(r"^reservation/delete_product_reservation/(?P<pk>\d+)$",
         views.deleteProduct, name="delete_product_reservation"),
     url(r"reservation/list", views.ReservationList.as_view(),
-        name="reservation_list")
+        name="reservation_list"),
 ]
+
+if TOKENIZE:
+    urlpatterns += [
+        url(r"reservation/token/(?P<pk>\d+)/(?P<token>[0-9a-f-]+)/(?P<status>\d)$",
+            views.update_reservation_by_token,
+            name="reservation_token")
+    ]
