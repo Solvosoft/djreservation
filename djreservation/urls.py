@@ -1,7 +1,7 @@
 '''
 Created on 1/8/2016
 
-@author: nashyra
+@author: luisza
 '''
 from __future__ import unicode_literals
 from django.conf.urls import url

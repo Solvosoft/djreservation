@@ -34,15 +34,8 @@ def update_product_related(sender, **kwargs):
         return
 
     if instance.status == str(sender.ACEPTED):
-        print("PRODUCTS :", instance.product_set.filter(borrowed=True))
         for product in instance.product_set.filter(borrowed=True):
             ref_obj = product.content_object
-            print(product.amount_field,
-                  getattr(ref_obj, product.amount_field),
-                  ' - ', product.amount, " = ",
-                  getattr(ref_obj, product.amount_field) - product.amount
-                  )
             setattr(ref_obj, product.amount_field,
                     getattr(ref_obj, product.amount_field) - product.amount)
-
             ref_obj.save()
