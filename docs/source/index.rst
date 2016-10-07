@@ -6,6 +6,8 @@
 Welcome to djreservation's documentation!
 =========================================
 
+  .. image:: https://github.com/luisza/djreservation/blob/master/demo/img/ReserveObject.png?raw=true
+
 Contents:
 
 .. toctree::
