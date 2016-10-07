@@ -25,7 +25,7 @@ Django reservation system
 Documentation
 -----------------
 
-see in readthedocs.io_
+See in readthedocs.io_
 
 .. _readthedocs.io: http://djreservation.readthedocs.io/en/latest/
 
