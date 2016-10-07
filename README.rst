@@ -22,6 +22,12 @@ Django reservation system
 * UI based on Twitter Bootstrap
 * Using i18n to handle translations
 
+Documentation
+-----------------
+
+see in readthedocs.io_
+
+.. _readthedocs.io: http://djreservation.readthedocs.io/en/latest/
 
 Installation
 --------------------

@@ -15,6 +15,7 @@ Contents:
 
    installation.rst
    howtouse.rst
+   settings.rst
 
 Indices and tables
 ==================
