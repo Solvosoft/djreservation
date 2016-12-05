@@ -15,7 +15,7 @@ from django.conf import settings
 
 BUILDING = Reservation.BUILDING
 REQUESTED = Reservation.REQUESTED
-ACEPTED = Reservation.ACEPTED
+ACCEPTED = Reservation.ACCEPTED
 DENIED = Reservation.DENIED
 BORROWED = Reservation.BORROWED
 RETURNED = Reservation.RETURNED
@@ -47,10 +47,10 @@ def email_requested(reservation, user):
         })
 
 
-def email_acepted(reservation, user):
+def email_accepted(reservation, user):
     send_html_email(
-        subject=_('Reservation acepted: reserv-%d') % (reservation.pk),
-        template='djreservation/mail/acepted.txt',
+        subject=_('Reservation accepted: reserv-%d') % (reservation.pk),
+        template='djreservation/mail/accepted.txt',
         context={
             'reservation': reservation,
             'user': user
@@ -94,7 +94,7 @@ def email_building(reservation, user):
 email_functions = {
     BUILDING: email_building,
     REQUESTED: email_requested,
-    ACEPTED: email_acepted,
+    ACCEPTED: email_accepted,
     DENIED: email_denied,
     BORROWED: email_borrowed,
     RETURNED: email_returned
