@@ -11,6 +11,7 @@ from __future__ import unicode_literals
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from djreservation.models import Reservation
+from djreservation.email import send_reservation_email
 
 """
 @receiver(post_save, sender=Reservation)
@@ -33,9 +34,21 @@ def update_product_related(sender, **kwargs):
     if instance.status == status:
         return
 
+    send_reservation_email(instance, instance.user)
+
+    # ACEPTED reservation status
     if instance.status == str(sender.ACEPTED):
+        print('ACEPTED')
         for product in instance.product_set.filter(borrowed=True):
             ref_obj = product.content_object
             setattr(ref_obj, product.amount_field,
                     getattr(ref_obj, product.amount_field) - product.amount)
+            ref_obj.save()
+
+    # RETURNED reservation status
+    elif instance.status == str(sender.RETURNED):
+        print('RETURNED')
+        for product in instance.product_set.filter():
+            ref_obj = product.content_object
+            setattr(ref_obj, product.amount_field, getattr(ref_obj, product.amount_field) + product.amount)
             ref_obj.save()

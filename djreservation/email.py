@@ -21,17 +21,19 @@ BORROWED = Reservation.BORROWED
 RETURNED = Reservation.RETURNED
 
 
-def send_html_email(subject, template, context={}):
+def send_html_email(subject, template, context=None):
+    if context is None:
+        context = {}
     reservation = context['reservation']
     message = render_to_string(template,
                                context)
     send_mail(
-        subject,
-        _('Please, use an email with html support'),
-        settings.DEFAULT_FROM_EMAIL,
-        [reservation.user.email],
-        html_message=message,
+        subject=subject,
+        message=_('Please, use an email with html support'),
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=[reservation.user.email],
         fail_silently=True,
+        html_message=message
     )
 
 
@@ -47,8 +49,8 @@ def email_requested(reservation, user):
 
 def email_acepted(reservation, user):
     send_html_email(
-        _('Reservation acepted: reserv-%d') % (reservation.pk),
-        'djreservation/mail/acepted.txt',
+        subject=_('Reservation acepted: reserv-%d') % (reservation.pk),
+        template='djreservation/mail/acepted.txt',
         context={
             'reservation': reservation,
             'user': user
