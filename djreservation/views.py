@@ -263,7 +263,7 @@ def update_reservation_by_token(request, pk, token, status):
 
     reservation = token_reservation.reservation
 
-    if int(status) == Reservation.ACEPTED:
+    if int(status) == Reservation.ACCEPTED:
         reservation.product_set.all().update(borrowed=True)
     reservation.status = status
     reservation.save()

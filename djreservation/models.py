@@ -6,7 +6,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.utils.translation import ugettext_lazy as _
 import uuid
-# Create your models here.
 
 auth_user = settings.AUTH_USER_MODEL if getattr(
     settings, "AUTH_USER_MODEL") else User
@@ -15,14 +14,14 @@ auth_user = settings.AUTH_USER_MODEL if getattr(
 class Reservation(models.Model):
     BUILDING = 0
     REQUESTED = 1
-    ACEPTED = 2
+    ACCEPTED = 2
     DENIED = 3
     BORROWED = 4
     RETURNED = 5
     STATUS = (
         (BUILDING, _("Building")),
         (REQUESTED, _("Requested")),
-        (ACEPTED, _("Acepted")),
+        (ACCEPTED, _("Accepted")),
         (DENIED, _("Denied")),
         (BORROWED, _("Borrowed")),
         (RETURNED, _("Returned")),
