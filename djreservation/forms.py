@@ -7,9 +7,11 @@ Free as freedom will be 2/9/2016
 '''
 
 from __future__ import unicode_literals
+
 from django import forms
-from .models import Product, Reservation
 from django.utils.translation import ugettext_lazy as _
+
+from .models import Product, Reservation
 
 
 class ReservationForm(forms.ModelForm):
