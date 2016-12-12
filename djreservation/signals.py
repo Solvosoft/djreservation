@@ -37,7 +37,7 @@ def update_product_related(sender, **kwargs):
     send_reservation_email(instance, instance.user)
 
     # ACCEPTED reservation status
-    if instance.status == str(sender.ACCEPTED):
+    if instance.status == sender.ACCEPTED:
         for product in instance.product_set.filter(borrowed=True):
             ref_obj = product.content_object
             setattr(ref_obj, product.amount_field,
@@ -45,7 +45,7 @@ def update_product_related(sender, **kwargs):
             ref_obj.save()
 
     # RETURNED reservation status
-    elif instance.status == str(sender.RETURNED):
+    elif instance.status == sender.RETURNED:
         for product in instance.product_set.filter():
             ref_obj = product.content_object
             setattr(ref_obj, product.amount_field, getattr(ref_obj, product.amount_field) + product.amount)
