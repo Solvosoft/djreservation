@@ -19,7 +19,7 @@ def proccess_reservation(obj, differ_obj, change_status):
         denied_reservation(obj, differ_obj, change_status)
     elif obj.status == Reservation.BORROWED:
         borrowed_reservation(obj, differ_obj, change_status)
-    elif obj.status == Reservation.DENIED:
+    elif obj.status == Reservation.RETURNED:
         returned_reservation(obj, differ_obj, change_status)
 
 
@@ -36,9 +36,9 @@ def borrowed_reservation(instance, differ_obj, change_status):
     if change_status:
         query = instance.product_set.filter(borrowed=True)
     else:
-        query = instance.product_set.filter(pk_in=differ_obj, borrowed=True)
+        query = instance.product_set.filter(pk__in=differ_obj, borrowed=True)
         not_borrowed = instance.product_set.filter(
-            pk_in=differ_obj, borrowed=False)
+            pk__in=differ_obj, borrowed=False)
     for product in query:
         ref_obj = product.content_object
         setattr(ref_obj, product.amount_field,

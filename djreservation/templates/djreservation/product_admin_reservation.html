@@ -42,8 +42,9 @@
     }); 
 {% if instance.status == instance.BORROWED %}
   $('#products input').change(function(){
-  	$("#id_status").val({{instance.BORROWED}});
-  	$("#id_status").attr("disabled", true); 
+  	 $("#id_status").val({{instance.BORROWED}});
+  	$("#id_status option").each(
+  		function(i,x){  if( {{instance.BORROWED}} != $(x).val() ){ $(x).remove();  }});
   });
 {% endif %}
   $('#id_status').change(function(event){

@@ -9,23 +9,26 @@ from .models import Reservation, Observation, Product
 from .product_manager import proccess_reservation
 
 # Register your models here.
+
+
 class ObservationInline(admin.StackedInline):
     model = Observation
     #fields = '__all__'
     extra = 0
 
+
 def different(l1, l2):
-    l1=list(l1)
+    l1 = list(l1)
     l2 = list(l2)
     for x in l1:
         if x in l2:
             l1.remove(x)
             l2.remove(x)
-            
+
     for x in l2:
-         if x in l1:
+        if x in l1:
             l1.remove(x)
-            l2.remove(x)       
+            l2.remove(x)
     return l1 + l2
 
 
@@ -48,7 +51,7 @@ class ReservationAdmin(admin.ModelAdmin):
             )
         }),
     )
-    
+
     def get_readonly_fields(self, request, obj=None):
         readonly =  admin.ModelAdmin.get_readonly_fields(self, request, obj=obj)
         if obj and obj.status == obj.RETURNED:
@@ -72,6 +75,7 @@ class ReservationAdmin(admin.ModelAdmin):
     list_of_products.short_description = "list of products"
 
     def save_model(self, request, obj, form, change):
+        differ_obj = []
         old_status, product_change = -1, False
         if change:
             old_status = obj.__class__.objects.filter(
@@ -81,9 +85,8 @@ class ReservationAdmin(admin.ModelAdmin):
             product_pks = request.POST.getlist("djreservation_product_list")
             old_pks = list(map(lambda x: str(x[0]),
                                obj.product_set.all().filter(
-                borrowed=True).values_list("pk")))  
+                borrowed=True).values_list("pk")))
             differ_obj = different(product_pks, old_pks)
-            print(differ_obj)
             if any(differ_obj):
                 obj.product_set.all().exclude(
                     pk__in=product_pks).update(borrowed=False)
@@ -92,9 +95,9 @@ class ReservationAdmin(admin.ModelAdmin):
                     pk__in=product_pks).update(borrowed=True)
                 product_change = True
 
-        change_status=int(old_status) != obj.status
+        change_status = int(old_status) != obj.status
         if product_change or change_status:
-#            send_reservation_email(obj, request.user)
+            #            send_reservation_email(obj, request.user)
             proccess_reservation(obj, differ_obj, change_status)
         return dev
 
