@@ -9,8 +9,19 @@
 
 	{% for product in instance.product_set.all%}
 	<tr>
-		<td><input type="checkbox" name="djreservation_product_list" 
-			value="{{product.pk}}" {% if product.borrowed %}checked{%endif%}> </td>
+		<td>
+			{% if instance.status == instance.RETURNED  %}
+				{% if product.borrowed %}
+				{% trans 'Returned' %}
+				{%else%}
+				{% trans 'Not borrowed' %}
+			{% endif %}
+			{% else %}
+			<input type="checkbox" name="djreservation_product_list" 
+			value="{{product.pk}}" {% if product.borrowed %}checked{%endif%} >
+			 </td>			
+			{% endif %}
+
 		<td>{{product}}</td>
 	</tr>
 
@@ -20,7 +31,31 @@
 
 
 <script>
-(function($){ $('input[name="all"]').change(function(){
+(function($){ 
+  $('input[name="all"]').change(function(){
 	if($(this).is(':checked') ){
-    $('#products input').prop( "checked", true );}}) })(django.jQuery)
+    	$('#products input').prop( "checked", true );
+    }else{
+    	$('#products input').prop( "checked", false );
+    }
+    
+    }); 
+{% if instance.status == instance.BORROWED %}
+  $('#products input').change(function(){
+  	 $("#id_status").val({{instance.BORROWED}});
+  	$("#id_status option").each(
+  		function(i,x){  if( {{instance.BORROWED}} != $(x).val() ){ $(x).remove();  }});
+  });
+{% endif %}
+  $('#id_status').change(function(event){
+  		var sel = $(this).find("option:selected").val(); 
+    	if(sel == 2){
+    		$('#products input').prop( "checked", true );
+    	}else if (sel == 3) {
+    		$('#products input').prop( "checked", false );
+    	}else if(sel == 4){
+    		
+    	}
+    })
+    })(django.jQuery)
 </script>

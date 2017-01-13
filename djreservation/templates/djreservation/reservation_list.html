@@ -27,9 +27,19 @@
   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 </a>
 {% endif %}	
-      			</li>
+</li>
       		{% endfor%}
       	</ul>
+
+{% if reservation.observation_set.count %}
+<div class="alert alert-info">
+	<h2> {% trans 'Observations' %}</h2>
+	{% for observation in reservation.observation_set.all %}
+		{{observation.text}}
+		<hr>
+	{% endfor%}
+</div>
+{% endif %}
       </div>
     </div>
   </div>
