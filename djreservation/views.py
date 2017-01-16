@@ -40,6 +40,11 @@ class CreateReservation(CreateView):
     form_class = ReservationForm
     success_url = "/"
 
+    def get_success_url(self):
+        if self.request.GET.get('next'):
+            return self.request.GET.get('next')
+        return super(CreateReservation, self).get_success_url()
+
     def get_success_view(self):
         response = HttpResponseRedirect(self.get_success_url())
         response.set_cookie("reservation", str(self.object.pk))

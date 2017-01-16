@@ -28,8 +28,8 @@
 </a>
 {% endif %}	
 </li>
-      		{% endfor%}
-      	</ul>
+		{% endfor%}
+</ul>
 
 {% if reservation.observation_set.count %}
 <div class="alert alert-info">
@@ -44,6 +44,8 @@
     </div>
   </div>
 
+	{% empty %}
+		 <h2> {% trans 'No reservations saved yet' %}</h2>
 	{% endfor %}
 </div>
 
@@ -70,5 +72,4 @@
 	</nav>
 
 {% endif %}
-
 {% endblock%}
