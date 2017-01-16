@@ -1,0 +1,208 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Djreservation\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-25 18:52-0600\n"
+"PO-Revision-Date: 2016-12-25 19:12-0600\n"
+"Last-Translator: Luis Zárate <luis.zarate@solvosoft.com>\n"
+"Language-Team: LANGUAGE <ES@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.6.10\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: email.py:32
+msgid "Please, use an email with html support"
+msgstr "Por favor use un cliente de correo con soporte HTML"
+
+#: email.py:42
+#, python-format
+msgid "Reservation requested: reserv-%d"
+msgstr "Reservación solicitada: reserv-%d"
+
+#: email.py:52
+#, python-format
+msgid "Reservation accepted: reserv-%d"
+msgstr "Reservación aceptada: reserv-%d"
+
+#: email.py:62
+#, python-format
+msgid "Reservation denied: reserv-%d"
+msgstr "Reservación denegada: reserv-%d"
+
+#: email.py:72
+#, python-format
+msgid "Reservation borrowed: reserv-%d"
+msgstr "Reservación prestada: reserv-%d"
+
+#: email.py:82
+#, python-format
+msgid "Reservation returned: reserv-%d"
+msgstr "Reservación regresada: reserv-%d"
+
+#: forms.py:23
+msgid "You can not create reservation with active reservation"
+msgstr "Usted no puede crear una reservación con otra activa"
+
+#: forms.py:41
+msgid "You amount correct, requested 0 or negative value"
+msgstr "Su cantidad está incorrecta, solicitado 0 o un valor negativo"
+
+#: forms.py:45
+msgid "You requested more than product available"
+msgstr "Usted solicitó más producto del disponible"
+
+#: models.py:22
+msgid "Building"
+msgstr "En construcción"
+
+#: models.py:23
+msgid "Requested"
+msgstr "Solicitado"
+
+#: models.py:24
+msgid "Accepted"
+msgstr "Aceptado"
+
+#: models.py:25
+msgid "Denied"
+msgstr "Denegado"
+
+#: models.py:26 templates/djreservation/mail/email_base.html:19
+msgid "Borrowed"
+msgstr "Prestado"
+
+#: models.py:27 templates/djreservation/product_admin_reservation.html:15
+msgid "Returned"
+msgstr "Retornado"
+
+#: templates/djreservation/mail/email_base.html:2
+msgid "Hi,"
+msgstr "Hola,"
+
+#: templates/djreservation/mail/email_base.html:5
+msgid "Reservation status"
+msgstr "Estado de la reservación"
+
+#: templates/djreservation/mail/email_base.html:7
+#: templates/djreservation/reservation_form.html:34
+msgid "Reservation start date"
+msgstr "Fecha inicio de la reservación"
+
+#: templates/djreservation/mail/email_base.html:9
+#: templates/djreservation/reservation_form.html:51
+msgid "Reservation end date"
+msgstr "Fecha fin de la reservación"
+
+#: templates/djreservation/mail/email_base.html:15
+msgid "List of products"
+msgstr "Lista de productos"
+
+#: templates/djreservation/mail/email_base.html:19
+#: templates/djreservation/product_admin_reservation.html:17
+msgid "Not borrowed"
+msgstr "No prestado"
+
+#: templates/djreservation/mail/email_base.html:27
+msgid "Thanks"
+msgstr "Gracias"
+
+#: templates/djreservation/mail/email_base.html:29
+msgid "Tramited by"
+msgstr "Tramitado por:"
+
+#: templates/djreservation/product_admin_reservation.html:7
+msgid "Approves all"
+msgstr "Aprobar todo"
+
+#: templates/djreservation/product_form.html:10
+msgid "Available:"
+msgstr "Disponible:"
+
+#: templates/djreservation/product_form.html:21
+msgid "Reserve"
+msgstr "Reservar"
+
+#: templates/djreservation/reservation_confirm.html:10
+msgid "Are you sure? See above the products details"
+msgstr "¿Está seguro? Observe abajo el detalle de los productos"
+
+#: templates/djreservation/reservation_confirm.html:13
+msgid "Finish this reservation"
+msgstr "Finalizar esta reservación"
+
+#: templates/djreservation/reservation_confirm.html:19
+msgid "Reserved products"
+msgstr "Productos reservados"
+
+#: templates/djreservation/reservation_confirm.html:30
+msgid "Products are not reserved yet"
+msgstr "Productos no reservados todavía"
+
+#: templates/djreservation/reservation_finished.html:7
+msgid "Thanks, your reservation was processed successfully"
+msgstr "Gracias, su reservación fue procesada correctamente"
+
+#: templates/djreservation/reservation_form.html:23
+msgid "Creating a reservation"
+msgstr "Creando reservaciones"
+
+#: templates/djreservation/reservation_form.html:66
+msgid "Submit"
+msgstr "Enviar"
+
+#: templates/djreservation/reservation_list.html:36
+msgid "Observations"
+msgstr "Observaciones"
+
+#: templates/djreservation/reservation_list.html:56
+msgid "Previous"
+msgstr "Anterior"
+
+#: templates/djreservation/reservation_list.html:61
+msgid "Page"
+msgstr "Página"
+
+#: templates/djreservation/reservation_list.html:66
+msgid "Next"
+msgstr "Siguiente"
+
+#: templates/djreservation/simple_reservation.html:6
+msgid "Creating a reservation of :"
+msgstr "Creando una reservación de:"
+
+#: views.py:64
+msgid "Reservation created"
+msgstr "Reservación creada"
+
+#: views.py:71
+msgid "No reservation object started"
+msgstr "Sin reservación inicializada"
+
+#: views.py:87
+msgid "Reservation finised"
+msgstr "Finalizar reservación"
+
+#: views.py:156
+msgid "Reservation created successful"
+msgstr "Reservación creada correctamente"
+
+#: views.py:224
+msgid "Product added successful"
+msgstr "Producto añadido correctamente"
+
+#: views.py:253
+msgid "Product deleted successful"
+msgstr "Producto eliminado correctamente"
+
+#: views.py:271
+msgid "Reservation updated successful"
+msgstr "Reservación actualizada correctamente"
