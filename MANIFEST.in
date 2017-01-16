@@ -2,3 +2,4 @@ include README.rst
 include LICENSE
 include requirements.txt
 recursive-include djreservation *
+graft djreservation/locale

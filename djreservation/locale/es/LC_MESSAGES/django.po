@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Djreservation\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-25 18:52-0600\n"
-"PO-Revision-Date: 2016-12-25 19:03-0600\n"
+"PO-Revision-Date: 2016-12-25 19:12-0600\n"
 "Last-Translator: Luis Zárate <luis.zarate@solvosoft.com>\n"
 "Language-Team: LANGUAGE <ES@li.org>\n"
 "Language: es\n"
@@ -153,7 +153,7 @@ msgstr "Gracias, su reservación fue procesada correctamente"
 
 #: templates/djreservation/reservation_form.html:23
 msgid "Creating a reservation"
-msgstr "creando reservaciones"
+msgstr "Creando reservaciones"
 
 #: templates/djreservation/reservation_form.html:66
 msgid "Submit"
