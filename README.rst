@@ -96,7 +96,7 @@ Append django reservation to  urlpatterns
 
 	urlpatterns = [
 		...
-		url(r"^reservation/create$", MyObjectReservation.as_view())
+		url(r"^reservation/create/(?P<modelpk>\d+)$", MyObjectReservation.as_view())
 	]
 	urlpatterns += djreservation_urls.urlpatterns
 
