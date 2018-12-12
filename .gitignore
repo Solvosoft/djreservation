@@ -63,4 +63,4 @@ target/
 db.sqlite3
 media/
 .settings/
-
+.idea/*

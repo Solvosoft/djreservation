@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView
 from .models import Product, Reservation, ReservationToken
 from .forms import ProductForm, ReservationForm
 from django.http.response import HttpResponseRedirect, Http404
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from .email import send_reservation_email
 from django.views.generic.list import ListView
