@@ -61,7 +61,7 @@ Set the urlpatterns in your urls.py
 
 	urlpatterns = [
 		...
-		url(r"^reservationroom/create$", RoomReservation.as_view())
+		url(r"^reservationroom/create/(?<pk>\d+)$", RoomReservation.as_view())
 	]
 
 
