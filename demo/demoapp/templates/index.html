@@ -1,0 +1,29 @@
+{% extends "base.html" %} 
+
+{% block content %}
+
+{% if  request.user.is_authenticated %}
+  {% if request.reservation %}
+  
+  <a href="{% url 'reservation_list' %}"> Show  Reservation </a>
+  <ul class="list-group">
+    {% for obj in list_object %}
+    <li class="list-group-item"> 
+      <a href="{% url 'myreservation' obj.pk %}" >{{obj}}</a>
+    </li>
+    {% endfor %}    
+  </ul>
+  <a href="{% url 'finish_reservation' %}">  Finish Reservation </a>
+  {% else %}
+  <a href="{% url 'add_user_reservation' %}"> Add new reservation </a>
+  {% endif %}
+
+{% else %}
+<div class="alert">
+  Please Login before create a reservation 
+
+  <a class="btn btn-success"  href="/admin/login/?next=/"> Login </a>
+</div>
+{% endif %}
+
+{% endblock %}

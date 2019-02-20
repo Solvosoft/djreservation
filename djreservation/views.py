@@ -4,7 +4,11 @@ from django.views.generic.edit import CreateView
 from .models import Product, Reservation, ReservationToken
 from .forms import ProductForm, ReservationForm
 from django.http.response import HttpResponseRedirect, Http404
-from django.core.urlresolvers import reverse
+try:
+    from django.core.urlresolvers import reverse
+except:
+    from django.urls import reverse
+
 from django.utils.translation import ugettext_lazy as _
 from .email import send_reservation_email
 from django.views.generic.list import ListView
@@ -255,7 +259,7 @@ class ProductReservationView(CreateView):
 def deleteProduct(request, pk):
     product = get_object_or_404(Product, pk=pk)
     product.delete()
-    messages.success(self.request, _('Product deleted successful'))
+    messages.success(request, _('Product deleted successful'))
     return redirect(reverse("finish_reservation"))
 
 

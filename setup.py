@@ -27,7 +27,7 @@ setup(
     author='Luis Zarate',
     author_email='luis.zarate@solvosoft.com',
     name='django-reservation',
-    version='0.2.8',
+    version='0.2.9',
     description='Powerful and dinamic reservation system in django.',
     long_description=README,
     url='https://github.com/luisza/djreservation',

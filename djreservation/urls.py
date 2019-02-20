@@ -4,7 +4,10 @@ Created on 1/8/2016
 @author: luisza
 '''
 from __future__ import unicode_literals
-from django.conf.urls import url
+try:
+    from django.conf.urls import url
+except:
+    from django.urls import re_path as url
 from . import views
 from .settings import TOKENIZE
 

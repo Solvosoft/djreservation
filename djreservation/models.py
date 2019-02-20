@@ -26,7 +26,7 @@ class Reservation(models.Model):
         (BORROWED, _("Borrowed")),
         (RETURNED, _("Returned")),
     )
-    user = models.ForeignKey(auth_user)
+    user = models.ForeignKey(auth_user, on_delete=models.CASCADE)
     reserved_start_date = models.DateTimeField(default=timezone.now)
     reserved_end_date = models.DateTimeField()
     status = models.SmallIntegerField(choices=STATUS, default=BUILDING)
@@ -44,7 +44,7 @@ class Reservation(models.Model):
 
 class Product(models.Model):
 
-    reservation = models.ForeignKey(Reservation)
+    reservation = models.ForeignKey(Reservation,  on_delete=models.CASCADE)
     amount = models.FloatField()
     amount_field = models.CharField(max_length=150)
     borrowed = models.BooleanField(default=False)
@@ -66,11 +66,11 @@ class Product(models.Model):
 
 
 class Observation(models.Model):
-    reservation = models.ForeignKey(Reservation)
+    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
     text = models.TextField()
 
 
 class ReservationToken(models.Model):
-    reservation = models.ForeignKey(Reservation)
+    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
     token = models.UUIDField(default=uuid.uuid4, editable=False)
     base_url = models.URLField(default="http://localhost:8000")
