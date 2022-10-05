@@ -9,7 +9,7 @@ Free as freedom will be 3/9/2016
 from __future__ import unicode_literals
 from .models import Reservation
 from django.core.mail import send_mail
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.template.loader import render_to_string
 from django.conf import settings
 
