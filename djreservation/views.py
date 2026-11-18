@@ -11,6 +11,7 @@ from .email import send_reservation_email
 from django.views.generic.list import ListView
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .settings import (END_RESERVATION_DATETIME,
                        START_RESERVATION_DATETIME,
                        TOKENIZE)
@@ -250,8 +251,10 @@ class ProductReservationView(CreateView):
         return CreateView.post(self, request, *args, **kwargs)
 
 
+@login_required
 def deleteProduct(request, pk):
-    product = get_object_or_404(Product, pk=pk)
+    product = get_object_or_404(
+        Product, pk=pk, reservation__user=request.user)
     product.delete()
     messages.success(request, _('Product deleted successful'))
     return redirect(reverse("finish_reservation"))
